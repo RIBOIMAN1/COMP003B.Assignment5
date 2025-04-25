@@ -1,7 +1,7 @@
-﻿using COMP003.Assignment5.Data;
-using COMP003.Assignment5.Models;
+﻿using COMP003B.Assignment5.Data;
+using COMP003B.Assignment5.Models;
 using Microsoft.AspNetCore.Mvc;
-namespace COMP003.Assignment5.Controllers
+namespace COMP003B.Assignment5.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]

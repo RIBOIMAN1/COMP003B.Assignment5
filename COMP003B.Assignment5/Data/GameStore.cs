@@ -1,7 +1,6 @@
-﻿using COMP003.Assignment5.Models;
-using COMP003B.Assignment5.Models;
+﻿using COMP003B.Assignment5.Models;
 
-namespace COMP003.Assignment5.Data;
+namespace COMP003B.Assignment5.Data;
 
 public static class GameStore
 {
