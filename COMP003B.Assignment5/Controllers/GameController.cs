@@ -5,7 +5,7 @@ namespace COMP003B.Assignment5.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
-	public class GameController : Controller
+	public class GameController : ControllerBase
 	{
 		[HttpGet]
 		public ActionResult<List<Game>> GetGames()
@@ -54,29 +54,6 @@ namespace COMP003B.Assignment5.Controllers
 			GameStore.Games.Remove(game);
 
 			return NoContent();
-		}
-		[HttpGet("filter")]
-		public ActionResult<List<Game>> FilterGames(decimal price)
-		{
-			var filteredGames = GameStore.Games
-				.Where(p => p.Price <= price)
-				.OrderBy(p => p.Price)
-				.ToList();
-
-			if (filteredGames.Count == 0)
-				return NotFound();
-
-			return Ok(filteredGames);
-		}
-		[HttpGet("names")]
-		public ActionResult<List<string>> GetGameNames()
-		{
-			var gameNames = GameStore.Games
-				.OrderBy(p => p.Name)
-				.Select(p => p.Name)
-				.ToList();
-
-			return Ok(gameNames);
 		}
 	}
 }
