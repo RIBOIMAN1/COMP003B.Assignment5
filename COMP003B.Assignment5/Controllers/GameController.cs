@@ -8,9 +8,9 @@ namespace COMP003B.Assignment5.Controllers
 	public class GameController : ControllerBase
 	{
 		[HttpGet]
-		public ActionResult<List<Game>> GetGames()
+		public ActionResult<IEnumerable<Game>> GetGames()
 		{
-			return Ok(GameStore.Games);
+			return GameStore.Games;
 		}
 		[HttpGet("{id}")]
 		public ActionResult<Game> GetGame(int id)
@@ -19,8 +19,7 @@ namespace COMP003B.Assignment5.Controllers
 
 			if (game is null)
 				return NotFound();
-
-			return Ok(game);
+			return game;
 		}
 		[HttpPost]
 		public ActionResult<Game> CreateGame(Game game)
@@ -33,6 +32,10 @@ namespace COMP003B.Assignment5.Controllers
 		[HttpPut("{id}")]
 		public IActionResult UpdateGame(int id, Game updatedGame)
 		{
+			if (id != updatedGame.Id)
+			{
+				return BadRequest("The ID in both the URL and request body must match each other.");
+			}
 			var existingGame = GameStore.Games.FirstOrDefault(p => p.Id == id);
 
 			if (existingGame is null)
@@ -40,6 +43,8 @@ namespace COMP003B.Assignment5.Controllers
 
 			existingGame.Name = updatedGame.Name;
 			existingGame.Price = updatedGame.Price;
+			existingGame.Genre = updatedGame.Genre;
+			existingGame.ReleaseDate = updatedGame.ReleaseDate;
 
 			return NoContent();
 		}
